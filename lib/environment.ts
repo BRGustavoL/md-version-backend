@@ -26,7 +26,7 @@ class Environment {
   }
 
   getDBName(): String {
-    let dbName = 'db_test_project_local'
+    let dbName = 'md-version'
     if (this.environment === Environments.prodEnv) {
       dbName = 'db_test_project_prod';
     } else if (this.environment === Environments.devEnv) {

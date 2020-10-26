@@ -2,22 +2,19 @@ import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import * as mongoose from 'mongoose'
 import environments from '../environment'
-import { TestRoutes } from '../routes/testRoutes'
-import { CommonRoutes } from '../routes/commonRoutes'
+import { UserRoutes } from '../routes/userRoutes'
 
 class App {
   public app: express.Application
-  public mongoUrl: String = 'mongodb://localhost/' + environments.getDBName()
+  public mongoUrl: String = 'mongodb://localhost:27017/' + environments.getDBName()
 
-  private testRoutes: TestRoutes = new TestRoutes()
-  private commonRoutes: CommonRoutes = new CommonRoutes()
+  private userRoutes: UserRoutes = new UserRoutes()
 
   constructor () {
     this.app = express()
     this.config()
     this.mongoSetup()
-    this.testRoutes.route(this.app)
-    this.commonRoutes.route(this.app)
+    this.userRoutes.route(this.app)
   }
 
   private config(): void {
