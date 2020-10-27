@@ -30,4 +30,19 @@ export class UserController {
       insufficientParameters(res)
     }
   }
+
+  public getUser(req: Request, res: Response) {
+    if (req && req.body.username && req.body.password) {
+      const userFilter = { username: req.body.username, password: req.body.password }
+      this.userService.filterUser(userFilter, (err: any, userData: IUser) => {
+        if (err) {
+          mongoError(err, res)
+        } else {
+          successResponse('Busca por usuário realizada com sucesso!', userData, res)
+        }
+      })
+    } else {
+      insufficientParameters(res)
+    }
+  }
 }

@@ -8,16 +8,6 @@ export default class UserService {
   }
 
   public filterUser(query: any, callback: any) {
-    users.findOne(query, callback)
-  }
-
-  public updateUser(userParams: IUser, callback: any) {
-    const query = { _id: userParams._id }
-    users.findOneAndUpdate(query, userParams, callback)
-  }
-
-  public deleteUser(_id: String, callback: any) {
-    const query = { _id: _id }
-    users.deleteOne(query, callback)
+    users.find(query, callback)
   }
 }
