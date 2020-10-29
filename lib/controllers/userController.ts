@@ -8,11 +8,13 @@ export class UserController {
   private userService: UserService = new UserService()
 
   public createUser(req: Request, res: Response) {
-    if (req && req.body && req.body.username && req.body.email && req.body.password) {
+    if (req.body.username && req.body.email && req.body.passwordMD2 && req.body.passwordMD4 && req.body.passwordMD5) {
       const userParams: IUser = {
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password,
+        passwordMD2: req.body.passwordMD2,
+        passwordMD4: req.body.passwordMD4,
+        passwordMD5: req.body.passwordMD5,
         modificationNotes: [{
           modifiedOn: new Date(Date.now()),
           modifiedBy: null,
@@ -32,8 +34,13 @@ export class UserController {
   }
 
   public getUser(req: Request, res: Response) {
-    if (req && req.body.username && req.body.password) {
-      const userFilter = { username: req.body.username, password: req.body.password }
+    if (req.body.username && req.body.passwordMD2 && req.body.passwordMD4 && req.body.passwordMD5) {
+      const userFilter = {
+        username: req.body.username,
+        passwordMD2: req.body.passwordMD2,
+        passwordMD4: req.body.passwordMD4,
+        passwordMD5: req.body.passwordMD5
+      }
       this.userService.filterUser(userFilter, (err: any, userData: IUser) => {
         if (err) {
           mongoError(err, res)
